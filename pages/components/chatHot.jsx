@@ -13,15 +13,23 @@ const ChatHot = () => {
               "https://desk.hottrix.in/show_form.php?form_id=U3FYR3R3VUZ1V2JWN3F4SExlT0p0UT09:cebca1b3d2a6c327d379fbcdfd9c257dafa3908e8693968d4e5da26fd430f492"
             }
           >
-            <Image
-              src={"/img/bls-qms.jpg"}
-              width={200}
-              height={90}
-              priority
-              alt="bls-qms"
-              className="img-fluid"
-              style={{ width: "100%", height: "auto" }}
-            />
+            <div
+              style={{
+                width: "200px",
+                height: "118px",
+                position: "relative",
+              }}
+            >
+              <Image
+                src={"/img/bls-qms.jpg"}
+                fill
+                priority
+                alt="bls-qms"
+                className="img-fluid"
+                sizes="40vw"
+                style={{ objectFit: "contain" }}
+              />
+            </div>
           </a>
         </div>
       </div>

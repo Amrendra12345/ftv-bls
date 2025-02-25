@@ -16,9 +16,9 @@ import {
   FaUser,
   FaUserCircle,
 } from "react-icons/fa";
-import { Inter } from "next/font/google";
+
 import { LoginDetail, useShowModel, useUserInfo } from "@/context/loginContext";
-const inter = Inter({ subsets: ["latin"] });
+
 const nextAuthUrl = "https://fasttrackvisa.com";
 
 const Navbar = (props) => {
@@ -94,7 +94,7 @@ const Navbar = (props) => {
 
   return (
     <>
-      <header className={`${inter.className} ${stickyClass}`}>
+      <header className={stickyClass}>
         <div className="container">
           <nav className="d-flex justify-content-between align-items-center">
             <div className="nav-brand">

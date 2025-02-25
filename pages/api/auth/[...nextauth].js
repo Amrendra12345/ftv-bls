@@ -58,9 +58,50 @@ export default NextAuth({
     strategy: "jwt",
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      console.log(user, "Signing in");
+      let loginDetail;
+
+      if (account?.provider === "credentials" && user !== undefined) {
+        loginDetail = {
+          provider_id: "",
+          provider: "",
+          name: user.name,
+          email: user.email,
+          phone: "",
+        };
+      } else {
+        loginDetail = {
+          provider_id: account.providerAccountId,
+          provider: account.provider,
+          name: user.name,
+          email: user.email,
+          phone: "",
+        };
+      }
+      const res = await fetch(`${process.env.BASE_URL}/api/user-login`, {
+        method: "POST",
+        body: JSON.stringify(loginDetail),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const result = await res.json();
+
+      return true;
+    },
     async jwt({ token }) {
       token.userRole = "admin";
       return token;
+    },
+    async session({ session, token, user }) {
+      if (token) {
+        session.user.id = token.id;
+        session.user.phone = token.phone;
+        session.user.provider = token.provider;
+        session.user.provider_id = token.provider_id;
+      }
+      return session;
     },
   },
 });

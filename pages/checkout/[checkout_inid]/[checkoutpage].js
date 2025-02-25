@@ -11,11 +11,14 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Payment from "@/pages/payment";
 import { useShowModel } from "@/context/loginContext";
+import { useSession } from "next-auth/react";
+
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 );
 
 const Checkoutpagein = (props) => {
+  const { data: session } = useSession();
   const { locale, pathname } = useRouter();
   const [travellerCount, setTravellerCount] = useState(1);
   const [showAlert, setShowAlert] = useState(false);
